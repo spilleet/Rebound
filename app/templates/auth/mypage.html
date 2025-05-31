@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">마이페이지</h1>
+    
+    <!-- 내가 생성한 경기 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">내가 생성한 경기</h2>
+        </div>
+        <div class="card-body">
+            {% if created_games %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>경기장</th>
+                                <th>날짜</th>
+                                <th>시간</th>
+                                <th>참가자 수</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for game in created_games %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('games.game_detail', id=game.id) }}">
+                                        {{ game.court.name }}
+                                    </a>
+                                </td>
+                                <td>{{ game.date.strftime('%Y-%m-%d') }}</td>
+                                <td>{{ game.start_time.strftime('%H:%M') }} - {{ game.end_time.strftime('%H:%M') }}</td>
+                                <td>{{ game.participants.count() }}/{{ game.max_players }}명</td>
+                                <td>
+                                    <form action="{{ url_for('games.delete_game', id=game.id) }}" 
+                                          method="POST" 
+                                          style="display: inline;">
+                                        <button type="submit" 
+                                                class="btn btn-danger btn-sm"
+                                                onclick="return confirm('정말로 이 경기를 삭제하시겠습니까?');">
+                                            삭제
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted">생성한 경기가 없습니다.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 내가 신청한 경기 -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="h5 mb-0">내가 신청한 경기</h2>
+        </div>
+        <div class="card-body">
+            {% if participated_games %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>경기장</th>
+                                <th>날짜</th>
+                                <th>시간</th>
+                                <th>주최자</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for game in participated_games %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('games.game_detail', id=game.id) }}">
+                                        {{ game.court.name }}
+                                    </a>
+                                </td>
+                                <td>{{ game.date.strftime('%Y-%m-%d') }}</td>
+                                <td>{{ game.start_time.strftime('%H:%M') }} - {{ game.end_time.strftime('%H:%M') }}</td>
+                                <td>{{ game.creator.username }}</td>
+                                <td>
+                                    <form action="{{ url_for('games.cancel_participation', id=game.id) }}" 
+                                          method="POST" 
+                                          style="display: inline;">
+                                        <button type="submit" 
+                                                class="btn btn-warning btn-sm"
+                                                onclick="return confirm('정말로 이 경기 신청을 취소하시겠습니까?');">
+                                            신청 취소
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted">신청한 경기가 없습니다.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
