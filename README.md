@@ -1,10 +1,12 @@
 # Rebound
 
-# Flask 웹 애플리케이션
+#웹 소개
 
-이 프로젝트는 Flask 프레임워크를 사용한 웹 애플리케이션입니다.
+장애인들을 위한 농구 경기 플랫폼(접근성 정보 제공)
 
 # 기술 스택
+Flask기반 웹
+
 ![image](https://github.com/user-attachments/assets/0fd588c9-3097-445e-a88e-bcf69c7cb450)
 
 #주요 기능
