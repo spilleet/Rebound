@@ -4,10 +4,11 @@
 
 이 프로젝트는 Flask 프레임워크를 사용한 웹 애플리케이션입니다.
 
-## 기술 스택
+# 기술 스택
 ![image](https://github.com/user-attachments/assets/0fd588c9-3097-445e-a88e-bcf69c7cb450)
 
-##주요 기능
+#주요 기능
+
 <img width="637" alt="image" src="https://github.com/user-attachments/assets/ff8a748f-cc63-4e92-88cc-b80033da73c6" />
 
 <img width="637" alt="image" src="https://github.com/user-attachments/assets/7d378e20-bd46-4b4a-9f2e-b759ef69e6e0" />
